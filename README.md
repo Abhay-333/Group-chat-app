@@ -59,7 +59,7 @@ cp backend/.env.example backend/.env
 3. Update `backend/.env`:
 
 ```env
-PORT=5000
+PORT=3000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_long_random_secret
 CLIENT_URL=http://localhost:5173
@@ -77,7 +77,7 @@ cp frontend/.env.example frontend/.env
 npm run dev
 ```
 
-Frontend runs at `http://localhost:5173`, and backend runs at `http://localhost:8001`.
+Frontend runs at `http://localhost:5173`, and backend runs at `http://localhost:3000`.
 
 ## API Overview
 
