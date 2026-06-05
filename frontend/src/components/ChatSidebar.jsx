@@ -79,7 +79,7 @@ const ChatSidebar = ({ chats, activeChat, onSelectChat, onRefresh }) => {
 
       <div className="search-box">
         <Search size={17} />
-        <input value={query} onChange={(event) => searchUsers(event.target.value)} placeholder="Search users" />
+        <input value={query} onChange={(event) => searchUsers(event.target.value)} placeholder="Find someone to chat with" />
       </div>
 
       {results.length > 0 && (
@@ -97,9 +97,9 @@ const ChatSidebar = ({ chats, activeChat, onSelectChat, onRefresh }) => {
       <section className="group-box">
         <div className="section-title">
           <Users size={17} />
-          <span>Create group</span>
+          <span>New group</span>
         </div>
-        <input value={groupName} onChange={(event) => setGroupName(event.target.value)} placeholder="Group name" />
+        <input value={groupName} onChange={(event) => setGroupName(event.target.value)} placeholder="Name your group" />
         {results.length > 0 && (
           <div className="member-picker">
             {results.map((member) => (

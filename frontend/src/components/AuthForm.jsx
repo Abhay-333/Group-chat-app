@@ -70,7 +70,7 @@ const AuthForm = () => {
           </label>
           {error && <p className="form-error">{error}</p>}
           <button className="primary-button" type="submit" disabled={submitting}>
-            {submitting ? "Please wait..." : mode === "login" ? "Login" : "Create account"}
+            {submitting ? "Hang on..." : mode === "login" ? "Jump back in" : "Start chatting"}
           </button>
         </form>
       </section>

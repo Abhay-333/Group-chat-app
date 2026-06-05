@@ -118,7 +118,8 @@ const ChatWindow = ({ chat, onMessage }) => {
     return (
       <section className="chat-empty">
         <Send size={38} />
-        <h2>Select or start a conversation</h2>
+        <h2>Pick a chat and say hello</h2>
+        <p>Your conversations will open here.</p>
       </section>
     );
   }
@@ -160,7 +161,7 @@ const ChatWindow = ({ chat, onMessage }) => {
       <div className="typing-line">{typingUser ? `${typingUser} is typing...` : ""}</div>
 
       <form className="message-form" onSubmit={sendMessage}>
-        <input value={content} onChange={(event) => handleTyping(event.target.value)} placeholder="Type a message" />
+        <input value={content} onChange={(event) => handleTyping(event.target.value)} placeholder="Write a message..." />
         <button className="icon-button send-button" type="submit" title="Send" aria-label="Send">
           <Send size={18} />
         </button>
