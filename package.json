@@ -1,0 +1,15 @@
+{
+  "name": "realtime-chat-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Real-time one-to-one and group chat application using React, Express, Socket.IO, and MongoDB.",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "start": "npm start --prefix backend",
+    "build": "npm run build --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
