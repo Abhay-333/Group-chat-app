@@ -1,13 +1,12 @@
 import { Router } from "express";
+import { login, me, register, searchUsers } from "../controllers/authController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = Router();
 
-router.post("/register", (req, res) => {
-  res.status(501).json({ message: "Registration is not implemented yet" });
-});
-
-router.post("/login", (req, res) => {
-  res.status(501).json({ message: "Login is not implemented yet" });
-});
+router.post("/register", register);
+router.post("/login", login);
+router.get("/me", protect, me);
+router.get("/users", protect, searchUsers);
 
 export default router;
