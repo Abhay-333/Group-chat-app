@@ -10,3 +10,4 @@ router.get("/me", protect, me);
 router.get("/users", protect, searchUsers);
 
 export default router;
+ 

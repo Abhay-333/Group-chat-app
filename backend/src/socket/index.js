@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import Chat from "../models/Chat.js";
 import Message from "../models/Message.js";
 import User from "../models/User.js";
+import socketAuth from "./middleware/socketAuth.js";
 
 export const initSocket = (server) => {
   const io = new Server(server, {
@@ -12,27 +13,8 @@ export const initSocket = (server) => {
     }
   });
 
-  io.use(async (socket, next) => {
-    try {
-      const token = socket.handshake.auth?.token;
-
-      if (!token) {
-        return next(new Error("Authentication token missing"));
-      }
-
-      const payload = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await User.findById(payload.userId).select("-password");
-
-      if (!user) {
-        return next(new Error("User not found"));
-      }
-
-      socket.user = user;
-      next();
-    } catch (error) {
-      next(new Error("Socket authentication failed"));
-    }
-  });
+  // Using socketAuth middleware from middleware folder
+  io.use(socketAuth);
 
   io.on("connection", async (socket) => {
     const userId = String(socket.user._id);

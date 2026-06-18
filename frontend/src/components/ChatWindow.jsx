@@ -30,11 +30,19 @@ const ChatWindow = ({ chat, onMessage }) => {
     }
 
     const loadMessages = async () => {
-      const { data } = await api.get(`/chats/${chat._id}/messages`);
-      setMessages(data);
-      await api.patch(`/chats/${chat._id}/read`);
-      getSocket()?.emit("chat:join", { chatId: chat._id });
-      getSocket()?.emit("message:read", { chatId: chat._id });
+      try {
+
+        const { data } = await api.get(`/chats/${chat._id}/messages`);
+        setMessages(data);
+
+        await api.patch(`/chats/${chat._id}/read`);
+
+        getSocket()?.emit("chat:join", { chatId: chat._id });
+        getSocket()?.emit("message:read", { chatId: chat._id });
+
+      } catch (error) {
+        setError(error.response?.data?.message || "Something went wrong in loading messages")
+      }
     };
 
     loadMessages();
@@ -88,6 +96,12 @@ const ChatWindow = ({ chat, onMessage }) => {
     clearTimeout(typingTimer.current);
     typingTimer.current = setTimeout(() => socket?.emit("typing:stop", { chatId: chat._id }), 800);
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(typingTimer.current);
+    };
+  }, []);
 
   const sendMessage = async (event) => {
     event.preventDefault();
