@@ -9,9 +9,27 @@ dotenv.config();
 const port = Number(process.env.PORT) || 3000;
 const server = http.createServer(app);
 
-connectDB();
-initSocket(server);
+// Server initiallization
+const startServer = async () => {
 
-server.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+  try {
+    // DB connection
+    await connectDB();
+
+    // Socket connection
+    initSocket(server);
+
+    // Server is Listening at port
+    server.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+
+  }
+  catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+};
+
+startServer();
+
