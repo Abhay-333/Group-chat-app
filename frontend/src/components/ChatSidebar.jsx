@@ -20,8 +20,13 @@ const ChatSidebar = ({ chats, activeChat, onSelectChat, onRefresh }) => {
       return;
     }
 
-    const { data } = await api.get(`/auth/users?q=${encodeURIComponent(value)}`);
-    setResults(data);
+    try {
+      const { data } = await api.get(`/auth/users?q=${encodeURIComponent(value)}`);
+      setResults(data);
+    } catch (error) {
+      setError(error.response?.data?.message || "Something went wrong in fetching users")
+    }
+
   };
 
   const startPrivateChat = async (member) => {
